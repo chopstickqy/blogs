@@ -17,7 +17,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
         Constants.GET_USER_INFO,
         { variables: { }}
     )
-
+    console.log(data);
     React.useEffect(()=>{
         $('.avatar.image')
         .popup({

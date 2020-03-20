@@ -19,6 +19,19 @@ const client = new ApolloClient({
           authorization: token ? `Bearer ${token}` : ''
         }
       })
+    },
+    onError: ({networkError,graphQLErrors,response,operation,forward})=>{
+      console.log(response);
+      if (networkError){
+        console.log("network",networkError) ;
+      }
+
+      if (graphQLErrors){
+        for(let err of graphQLErrors){
+          console.log(err)
+
+        }
+      }
     }
 });
 

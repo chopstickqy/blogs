@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as Constants from './shared/gglQueries';
 import * as Interfaces from './shared/interfaces';
 
-import Card from './semantic-components/card';
+import PreviewCard from './semantic-components/card';
 import Header from './semantic-components/header';
 import AccordionList from './semantic-components/accordion-list';
 import { useQuery } from '@apollo/react-hooks';
@@ -14,11 +14,11 @@ interface IAppProps {
 
 const App: React.FunctionComponent<IAppProps> = (props) => {
   
-  // const { data } = useQuery<Interfaces.GithubViewerData>(
-  //   Constants.GET_ARTICLES,
-  //   { variables: { nextPage: 0 }}
-  // )
-  // console.log(data);
+  const { loading, data } = useQuery<Interfaces.GithubArticlesData>(
+    Constants.GET_ARTICLES,
+    { variables: { nextPage: 0 }}
+  )
+  console.log(data);
   React.useEffect(() => {
     async function fetchAuth() {
       const code = window.location.search.split('code=')[1];
@@ -54,16 +54,19 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         <div className="ui grid">
           <div className="ten wide column">
              <div className="ui container">
-              <div className="ui grid">
-                <div className="column">
-                  <Card />  
-                </div>
-              </div>
-              <div className="ui grid">
-                <div className="column">
-                  <Card />  
-                </div>
-              </div>
+              {
+                data == null ? null : (
+                  data.repository.issues.nodes.map((issue: Interfaces.GithubNode, index: number) => {
+                    return (
+                      <div className="ui grid" key={index}>
+                        <div className="column">
+                          <PreviewCard issue={issue}/>  
+                        </div>
+                      </div>
+                    )
+                  })
+                )
+              }
             </div>
           </div>
           <div className="six wide column">
