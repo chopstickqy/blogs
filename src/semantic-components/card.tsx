@@ -2,6 +2,7 @@ import * as React from 'react';
 import marked from 'marked';
 
 import * as Interfaces from '../shared/interfaces';
+import { Link } from 'react-router-dom';
 // import '../index.css';
 
 interface ICardProps {
@@ -19,20 +20,26 @@ const PreviewCard: React.FunctionComponent<ICardProps> = (props) => {
  
     const cover = regCover == null ? "" : regCover[1];;
     const createdAt = new Date(issue.createdAt).toLocaleDateString('zh').replace(/\//g, '-');
-    console.log(cover)
     return (
         <div className="Card">
             <div className="ui card" style={{width: "auto"}}>
                 <div className="image" style={{height: "40vh"}}>
                     <h3 className="ui header cover-title">{ issue.title }</h3>
-                    <img className="image-cover" src={ cover } />
+                    <Link to={'/article/' + issue.number}>
+                        <img className="image-cover" src={ cover } />
+                    </Link>
                 </div>
                 <div className="content">
                     {/* <a className="header">Kristy</a> */}
                     <div className="meta">
                         <i className="clock outline icon"></i>
-                        <span className="date">{ createdAt }</span>
-                        <div className="ui purple horizontal label">{ issue.labels.nodes[0].name }</div>
+                        <span className="date" style={{marginRight: "0.5rem"}}>{ createdAt }</span>
+                        {
+                            issue.labels.nodes.map((lableNode: Interfaces.GithubLabelsNode, index: number) => {
+                                return <div className="ui horizontal label" key={index} style={{backgroundColor: '#'+lableNode.color}}>{ lableNode.name }</div>
+                            })
+                        }
+                        
                     </div>
                 
                 </div>

@@ -27,4 +27,37 @@ code {
 
 .image-cover {
   height: 100% !important;
+  width: 100% !important;
+}
+
+.Header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding-bottom: 10px;
+}
+
+.AccordionList {
+  position: fixed;
+  width: 37.5%!important;
+  max-width: 400px;
+}
+
+.Main-content {
+  top: 7rem !important;
+  position: relative;
+}
+
+blockquote {
+  color: #666;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  padding-left: 3em;
+  border-left: 0.5em #eee solid;
+}
+
+img {
+  max-width: 100%;
 }

@@ -13,6 +13,7 @@ export interface GithubArticlesData {
 }
 
 export interface GithubRepository {
+    id: string;
     issues: GithubIssues;
 }
 
@@ -27,6 +28,7 @@ export interface GithubPageInfo {
 }
 
 export interface GithubNode {
+    id: string;
     title: string;
     number: number;
     body: string;
@@ -49,10 +51,26 @@ export interface GithubLabelsNode {
 
 export interface GithubComments {
     totalCount: number;
+    nodes: GitHubCommentNode[];
     __typename: string;
 }
 
 export interface GithubReactions {
     totalCount: number;
     __typename: string;
+}
+
+export interface GitHubCommentNode {
+    author: GithubAuthor;
+    body: string;
+    bodyHTML: string;
+    bodyText: string;
+    createdAt: string;
+}
+
+export interface GithubAuthor {
+    avatarUrl: string;
+    login: string;
+    resourcePath: string;
+    url: string;
 }

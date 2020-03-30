@@ -1,15 +1,19 @@
 import gql from 'graphql-tag';
 
+//         repository(owner: "jrainlau", name: "jrainlau.github.io") {
 
 export const GET_ARTICLES = gql`
     query GetArticles {
-      repository(owner: "jrainlau", name: "jrainlau.github.io") {
-        issues(filterBy: { createdBy: "jrainlau"}, first: 100, states: OPEN, orderBy: {field: CREATED_AT, direction: DESC}) {
+
+        repository(owner: "gentleen", name: "blogs.io") {
+        id
+        issues(filterBy: { createdBy: "gentleen"}, first: 100, states: OPEN, orderBy: {field: CREATED_AT, direction: DESC}) {
           pageInfo {
             hasNextPage
             endCursor
           }
           nodes {
+            id
             title
             number
             body
@@ -20,8 +24,20 @@ export const GET_ARTICLES = gql`
                     name
                 }
             }
-            comments {
+            comments (first: 100){
                 totalCount
+                nodes {
+                  author{
+                    avatarUrl                   
+                    login 
+                    resourcePath
+                    url
+                  }
+                  body
+                  bodyHTML
+                  bodyText
+                  createdAt
+                }
             }
             reactions(content: THUMBS_UP) {
                 totalCount

@@ -5,6 +5,7 @@ import * as Constants from '../shared/gglQueries';
 import * as Interfaces from '../shared/interfaces';
 import Search from './search';
 import DropDown from './drop-down';
+import logo from '../logo.png'
 
 declare const $: any;
 
@@ -32,9 +33,9 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
         <div className="Header">
             <div className="ui borderless main menu">
                 <div className="ui container">
-                    <div className="header item">
-                        <img className="logo" src="assets/images/logo.png"/ >
-                        Project Name
+                    <div className="header item" style={{ fontSize: '1.5rem'}}>
+                        Gentleen
+                        <img className="logo" src={logo} / >
                     </div>
                     <div className="ui right floated item">
                         <Search />
